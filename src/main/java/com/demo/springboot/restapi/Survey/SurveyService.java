@@ -71,20 +71,45 @@ public class SurveyService {
     }
 
 
-    public String addNewSurveyQuestions(@PathVariable String surveyId, Question question) {
-
+    public String addNewSurveyQuestions(String surveyId, Question question) {
         List<Question> questions = getAllSurveyQuestions(surveyId);
-        SecureRandom secureRandom = new SecureRandom();
-        String randomID = new BigInteger(32, secureRandom).toString();
+
         question.setId(generateRandomId());
         questions.add(question);
+
         return question.getId();
-    };
+    }
 
     public String generateRandomId() {
         SecureRandom secureRandom = new SecureRandom();
         String randomID = new BigInteger(32, secureRandom).toString();
+
         return randomID;
+    }
+
+    public String deleteSurveyQuestion(String surveyId, String questionId) {
+        List<Question> surveyQuestions = getAllSurveyQuestions(surveyId);
+
+        if(surveyQuestions == null)
+            return null;
+
+        Predicate<? super Question> predicate = q -> q.getId().equalsIgnoreCase(questionId);
+        //removeIf returns a boolean
+        boolean removed = surveyQuestions.removeIf(predicate);
+
+        if(!removed) return null;
+
+        return questionId;
+    }
+
+    public String updateSurveyQuestion(String surveyId, String questionId, Question question) {
+        List<Question> questions = getAllSurveyQuestions(surveyId);
+
+        //removeIf returns a boolean
+        boolean removed = questions.removeIf(q -> q.getId().equalsIgnoreCase(questionId));
+        questions.add(question);
+
+        return questionId;
     }
 
 }
