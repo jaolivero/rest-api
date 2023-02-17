@@ -10,22 +10,15 @@ public class UserDetails {
     @GeneratedValue
     private Long id;
 
-    @Override
-    public String toString() {
-        return "UserDetails{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
     private String name;
-    private String role;
 
+    private String role;
     public UserDetails(String name, String role) {
         this.name = name;
         this.role = role;
     }
+
+    public UserDetails(){}
 
     public Long getId() {
         return id;
@@ -37,5 +30,14 @@ public class UserDetails {
 
     public String getRole() {
         return role;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

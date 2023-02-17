@@ -51,7 +51,7 @@ public class SurveyResource {
 
     // localhost:8080/surveys/surveysid/questions/questions1
     @RequestMapping("/surveys/{surveyId}/questions/{questionId}")
-    public Question getSpecificSurveyQuestions(@PathVariable String surveyId,@PathVariable String questionId) {
+    public Question getSpecificSurveyQuestion(@PathVariable String surveyId,@PathVariable String questionId) {
 
         Question question = surveyService.getSpecificSurveyQuestion(surveyId, questionId);
 
